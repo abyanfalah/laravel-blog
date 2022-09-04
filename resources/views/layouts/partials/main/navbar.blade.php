@@ -24,16 +24,57 @@
 
             {{-- right navbar menu --}}
             <div class="navbar-nav ms-auto">
-                <a href="/login" class="nav-item nav-link">
-                    <i class="bi-box-arrow-in-right"></i>
-                    Login
-                </a>
+                 @auth
+                    <div class="dropdown">
+                        <a class="nav-item nav-link dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            {{ auth()->user()->name }}
+                        </a>
 
-                <a href="/testpage" class="nav-item nav-link">
-                    <i class="bi-gear-wide"></i>
-                    Testpage
-                </a>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            {{-- dashboard --}}
+                            <li>
+                                <a class="dropdown-item" href="/dashboard">
+                                    <i class="bi-window"></i>
+                                    Dashboard
+                                </a>
+                            </li>
+
+                            {{-- profile --}}
+                            <li>
+                                <a href="/profile" class="dropdown-item">
+                                    <i class="bi-person-fill"></i>
+                                    Profile
+                                </a>
+                            </li>
+
+                            <li><hr class="dropdown-divider"></li>
+
+                            {{-- logout --}}
+                            <li>
+                                <form action="/logout" method="POST">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">
+                                        <i class="bi-box-arrow-right"></i>
+                                        Logout
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+
+                @else
+                    <a href="/login" class="nav-item nav-link">
+                        <i class="bi-box-arrow-in-right"></i>
+                        Login
+                    </a>
+
+                @endauth
+
             </div>
         </div>
     </div>
+    <a href="/testpage" class="text-light me-3">
+        <i class="bi-gear-wide"></i>
+        Testpage
+    </a>
 </nav>

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,13 +36,15 @@ Route::get('/categories', function () {
 
 Route::get('/authors', function () {
     return view('authors', [
-        "title" => "authors",
+        "title"   => "authors",
         "authors" => User::all()
     ]);
 });
 
 Route::get('/login', [UserController::class, 'login_page']);
+Route::post('/login', [UserController::class, 'login']);
 
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 Route::get('/testpage', function () {
     return dd(request());
