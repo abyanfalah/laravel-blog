@@ -2,16 +2,45 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Post extends Model
 {
     use HasFactory;
+    // use Sluggable;
 
     protected $guarded = ['id'];
     protected $with = ['user', 'category'];
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    public function scopeFilter($query, array $filters)
+    {
+        // filter by search
+        if ($search = $filters['search'] ?? false) {
+            $query->where('title', 'like', '%' . $search . '%');
+        }
+
+        // filter by author
+        if ($username = $filters['author'] ?? false) {
+            $query->whereHas('user', function ($query) use ($username) {
+                $query->where('username', $username);
+            });
+        }
+
+        // filter by category
+        if ($slug = $filters['category'] ?? false) {
+            $query->whereHas('category', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            });
+        }
+    }
 
     public function category()
     {
@@ -23,39 +52,12 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    // filter
-    public function scopeFilter($query, array $filters)
-    {
-        // search
-        if ($search = $filters['search'] ?? false) {
-            return $query->where('title', 'like', '%' . $search . '%');
-        }
-
-        // category
-        if ($slug = $filters['category'] ?? false) {
-            return $query->whereHas(
-                'category',
-                function ($query) use ($slug) {
-                    $query->where('slug', $slug);
-                }
-            );
-        }
-
-        // author
-        if ($username = $filters['author'] ?? false) {
-            return $query->whereHas(
-                'user',
-                function ($query) use ($username) {
-                    $query->where('username', $username);
-                }
-            );
-        }
-    }
-
-    public function scopeSearch($query, $search)
-    {
-        return $query
-            ->where('title', 'like', '%' .     $search . '%')
-            ->orWhere('body', 'like', '%' .     $search . '%');
-    }
+    // public function sluggable(): array
+    // {
+    //     return [
+    //         'slug' => [
+    //             'source' => 'title'
+    //         ]
+    //     ];
+    // }
 }

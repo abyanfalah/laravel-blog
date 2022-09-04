@@ -3,20 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\User;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
     public function index()
     {
-        $post = Post::filter(
+        $posts = Post::filter(
             request(['search', 'author', 'category'])
-        )
-            ->get();
+        );
+
+        $filtered = [];
+        if (request('author')) {
+            $filtered["author"] = User::where('username', request('author'))->value('name');
+        }
+
+        if (request('category')) {
+            $filtered["category"] = Category::where('slug', request('category'))->value('name');
+        }
 
         return view('posts', [
             "title" => "Blog posts",
-            "posts" => $post
+            "posts" => $posts->get(),
+            "filtered" => $filtered
         ]);
     }
 

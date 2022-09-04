@@ -1,33 +1,61 @@
 @extends('layouts.main')
 
+{{-- @dd($dump) --}}
+
 @section('content')
 
+
 @if ($posts->count() > 0)
-
-
 	<div class="mb-3">
         <div class="row">
             <div class="col">
                 <h2 class="d-inline">Blog Posts</h2>
             </div>
 
-            {{-- search form --}}
+            {{-- forms (requests inputs)--}}
             <div class="col">
-                <form action="">
+                <form method="GET">
+                    {{-- SEARCH --}}
                     <div class="input-group">
                         <input type="search" class="form-control" placeholder="Search" name="search" value="{{ request('search') }}">
                         <button class="btn btn-danger">
                             <img src="/assets/symbols/magnifying-glass.svg" alt="">
                         </button>
                     </div>
+
+                    {{-- AUTHOR --}}
+                    @if (request('author'))
+                        <input type="hidden" name="author" value="{{ request('author') }}">
+                    @endif
+
+                    {{-- CATEGORY --}}
+                    @if (request('category'))
+                        <input type="hidden" name="category" value="{{ request('category') }}">
+                    @endif
+
                 </form>
+
+
+
+
             </div>
         </div>
     </div>
 
     @if (request('search'))
-        <h3>Searching: {{ request('search') }}</h3>
+        <h3 class="fs-6 badge bg-danger">Searching: "{{ request('search') }}"</h3>
     @endif
+
+    @if (request('author'))
+        <h3 class="fs-6 badge bg-success">By: {{ $filtered['author'] }}</h3>
+    @endif
+
+    @if (request('category'))
+        <h3 class="fs-6 badge bg-primary">In: {{ $filterd['category'] }}</h3>
+    @endif
+
+
+
 
 
     <div class="card mb-3">
