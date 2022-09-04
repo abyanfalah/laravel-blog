@@ -51,7 +51,7 @@
     @endif
 
     @if (request('category'))
-        <h3 class="fs-6 badge bg-primary">In: {{ $filterd['category'] }}</h3>
+        <h3 class="fs-6 badge bg-primary">In: {{ $filtered['category'] }}</h3>
     @endif
 
 

@@ -5,6 +5,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,7 +23,6 @@ Route::get('/', function () {
     return view('home');
 });
 
-
 Route::get('/posts', [PostController::class, 'index']);
 Route::get('/post/{post:slug}', [PostController::class, 'show']);
 
@@ -39,6 +39,8 @@ Route::get('/authors', function () {
         "authors" => User::all()
     ]);
 });
+
+Route::get('/login', [UserController::class, 'login_page']);
 
 
 Route::get('/testpage', function () {

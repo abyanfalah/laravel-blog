@@ -24,7 +24,8 @@ class Post extends Model
     {
         // filter by search
         if ($search = $filters['search'] ?? false) {
-            $query->where('title', 'like', '%' . $search . '%');
+            $query->where('title', 'like', '%' . $search . '%')
+                ->orWhere('body', 'like', '%' . $search . '%');
         }
 
         // filter by author
