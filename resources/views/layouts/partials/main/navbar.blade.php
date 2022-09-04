@@ -51,13 +51,11 @@
 
                             {{-- logout --}}
                             <li>
-                                <form action="/logout" method="POST">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">
-                                        <i class="bi-box-arrow-right"></i>
-                                        Logout
-                                    </button>
-                                </form>
+                                <button class="dropdown-item" data-bs-toggle="modal" data-bs-target="#logoutModal">
+                                    <i class="bi-box-arrow-right"></i>
+                                    Logout
+                                </button>
+
                             </li>
                         </ul>
                     </div>

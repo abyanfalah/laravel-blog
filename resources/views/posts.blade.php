@@ -57,7 +57,6 @@
 
 
 
-
     <div class="card mb-3">
         <img class="img-top rounded-top" height="350px" src="/assets/img/posts/{{ mt_rand(1,15) }}.jpg" alt="{{ $posts[0]->name }}">
         <div class="card-body">

@@ -27,7 +27,7 @@ class UserController extends Controller
 
         if (Auth::attempt($validated_credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/')->with("login_message", "welcome " . auth()->user()->name);
+            return redirect()->intended('/dashboard')->with("login_message", "welcome " . auth()->user()->name);
         }
 
         $login_message = [
@@ -37,5 +37,15 @@ class UserController extends Controller
         ];
 
         return back()->with("login_message", $login_message[0]);
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+
+        request()->session()->invalidate();
+        request()->session()->regenerateToken();
+
+        return redirect('/');
     }
 }

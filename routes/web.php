@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DashboardPostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,11 +42,21 @@ Route::get('/authors', function () {
     ]);
 });
 
-Route::get('/login', [UserController::class, 'login_page']);
-Route::post('/login', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login_page'])->middleware('guest')->name('login');
+Route::post('/login', [UserController::class, 'login'])->middleware('guest');
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
+Route::get('/dashboard/posts', [DashboardController::class, 'posts'])->middleware('auth');
+
+// RESOURCE ===============================
+Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+
+
+// ========================================
+
 
 Route::get('/testpage', function () {
-    return dd(request());
+    // return dd(request());
+    return view('modals.logout');
 });

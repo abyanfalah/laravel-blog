@@ -10,4 +10,5 @@
     </div>
 </div>
 
+@include('modals.logout')
 @include('layouts.partials.main.footer')
