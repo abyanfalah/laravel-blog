@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<div class="card mb-5">
+    <div class="card mb-5">
     <div class="div">
         <a href="/posts" class="btn btn-danger position-absolute"><i class="bi-arrow-left"></i> Back to posts</a>
         <img src="/assets/img/posts/{{ mt_rand(1, 15) }}.jpg" height="300px" alt="{{ $post->title }}" class="card-img-top rounded-top">
