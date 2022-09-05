@@ -47,7 +47,6 @@ Route::post('/login', [UserController::class, 'login'])->middleware('guest');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
-Route::get('/dashboard/posts', [DashboardController::class, 'posts'])->middleware('auth');
 
 // RESOURCE ===============================
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');

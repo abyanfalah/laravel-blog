@@ -14,12 +14,4 @@ class DashboardController extends Controller
 
         ]);
     }
-
-    public function posts()
-    {
-        return view('dashboard.posts', [
-            "title" => "My posts",
-            "posts" => Post::where('user_id', auth()->user()->id)->get()
-        ]);
-    }
 }

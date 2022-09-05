@@ -14,7 +14,10 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.posts', [
+            "title" => "My posts",
+            "posts" => Post::where('user_id', auth()->user()->id)->get()
+        ]);
     }
 
     /**
@@ -46,7 +49,10 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return view('dashboard.post-view', [
+            "title" => "My post",
+            "post" => $post
+        ]);
     }
 
     /**

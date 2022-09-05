@@ -7,7 +7,7 @@
 
 		<li class="nav-item ">
 			<a href="/dashboard" class="nav-link
-            {{ request()->is('dashboard') ? 'text-danger bg-white' : 'text-white' }}">
+            {{ request()->is('dashboard') ? 'text-danger bg-white shadow-sm' : 'text-white' }}">
                 <i class="bi-window"></i>
                 Dashboard
             </a>
@@ -15,7 +15,7 @@
 
         <li class="nav-item ">
 			<a href="/dashboard/posts" class="nav-link
-            {{ request()->is('dashboard/post*') ? 'text-danger bg-white' : 'text-white' }}">
+            {{ request()->is('dashboard/post*') ? 'text-danger bg-white shadow-sm' : 'text-white' }}">
                 <i class="bi-file-text"></i>
                 My posts
             </a>
