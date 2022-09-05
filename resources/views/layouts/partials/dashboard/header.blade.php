@@ -22,7 +22,14 @@
 
     {{-- Datatables  --}}
     <link rel="stylesheet" href="/assets/datatables/dataTables.bootstrap4.min.css">
-    <script src="/assets/dataTables.bootstrap4.min.js"></script>
+    <script src="/assets/datatables/dataTables.bootstrap4.min.js"></script>
+
+    {{-- Trix --}}
+    <link rel="stylesheet" href="/assets/trix/trix.css">
+    <script src="/assets/trix/trix.js"></script>
+
+    {{-- slugify.js --}}
+    <script src="/assets/slugify.js"></script>
 
     <style>
         a{
@@ -50,6 +57,10 @@
             .bd-placeholder-img-lg {
             font-size: 3.5rem;
             }
+        }
+
+        trix-toolbar [data-trix-button-group=file-tools]{
+            display: none;
         }
     </style>
 

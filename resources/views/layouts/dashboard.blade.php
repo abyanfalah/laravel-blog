@@ -1,4 +1,4 @@
-@include('layouts.partials.main.header')
+@include('layouts.partials.dashboard.header')
 
 <div class="container-fluid">
     <div class="row">

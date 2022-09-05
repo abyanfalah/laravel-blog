@@ -10,9 +10,9 @@
                     <h3 >My posts</h3>
                 </div>
                 <div class="col text-end">
-                    <button class="btn btn-success">
+                    <a href="/dashboard/posts/create" class="btn btn-success">
                         &plus; Create new post
-                    </button>
+                    </a>
                 </div>
             </div>
 
