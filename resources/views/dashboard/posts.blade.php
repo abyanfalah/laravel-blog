@@ -18,7 +18,7 @@
 
         </div>
         <div class="card-body">
-            <table class="table table-borderless table-striped  mx-auto">
+            <table class="table table-borderless table-striped mx-auto">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -51,23 +51,7 @@
             </table>
         </div>
     </div>
+
+
 </div>
-<button id="asdf" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#postCreatedModal">
-    asdf
-</button>
-
-
-
-    @if ($msg = session('dashboard_message'))
-        <script>
-            $(document).ready(function(){
-                let modal = $("#postCreatedModal")
-                modal.modal('show')
-                setTimeout(() => {
-                    modal.modal('hide')
-                }, 1500);
-            })
-        </script>
-    @endif
-
 @endsection
