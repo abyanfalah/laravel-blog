@@ -15,7 +15,6 @@
     </div>
 </div>
 
-
 @include('modals.post-created')
 @include('modals.post-deleted')
 @include('layouts.partials.main.footer')
