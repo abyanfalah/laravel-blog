@@ -9,8 +9,6 @@
                 <div class="col">
                     <h3 >My posts</h3>
                 </div>
-
-                {{-- btn create new post --}}
                 <div class="col text-end">
                     <a href="/dashboard/posts/create" class="btn btn-success">
                         &plus; Create new post
