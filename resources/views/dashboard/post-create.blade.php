@@ -9,7 +9,7 @@
         {{-- title --}}
         <div class="form-group mb-3">
             <label>Title</label>
-            <input name="title" type="text"
+            <input autofocus name="title" type="text"
             class="form-control
             @error('title')
                 is-invalid
