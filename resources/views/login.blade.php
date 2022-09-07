@@ -57,7 +57,8 @@
             <div class="text-center d-block">
                 <small class="text-dark d-block">
                 <span class="text-muted">Have no account yet?</span>
-                <a href="#">Register here</a>
+                {{-- <a href="/registration" data-bs-toggle="modal" data-bs-target="#registrationModal">Register here</a> --}}
+                <a href="/registration">Register here</a>
             </small>
 
             <small class="text-dark d-block">
@@ -80,4 +81,6 @@
     })
 </script>
 @endif
+
+{{-- @include('modals.registration') --}}
 @endsection
