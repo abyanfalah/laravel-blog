@@ -26,7 +26,7 @@ class PostController extends Controller
 
         return view('posts', [
             "title" => "Blog posts",
-            "posts" => $posts->get(),
+            "posts" => $posts->latest()->get(),
             "filtered" => $filtered
         ]);
     }
