@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,5 +48,27 @@ class UserController extends Controller
         request()->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function registration_page()
+    {
+        return view('registration', [
+            "title" => 'registration'
+        ]);
+    }
+
+    public function registration(Request $request)
+    {
+
+        $validated_data = $request->validate([
+            "name" => "required|max:255",
+            "username" => "required|unique:users|min:4|max:128",
+            "email" => "required|unique:users|email",
+            "password" => "required|min:8|max:64"
+        ]);
+
+        User::create($validated_data);
+
+        return redirect('/login')->with('login_message', "You've been registered, now try login :)");
     }
 }
