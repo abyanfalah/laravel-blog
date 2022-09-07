@@ -46,6 +46,10 @@ Route::get('/login', [UserController::class, 'login_page'])->middleware('guest')
 Route::post('/login', [UserController::class, 'login'])->middleware('guest');
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
+Route::get('/registration', [UserController::class, 'registration_page'])->middleware('guest');
+Route::post('/registration', [UserController::class, 'registration'])->middleware('guest');
+
+
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
 // RESOURCE ===============================
@@ -56,6 +60,5 @@ Route::resource('/dashboard/posts', DashboardPostController::class)->middleware(
 
 
 Route::get('/testpage', function () {
-    // return dd(request());
     return view('modals.logout');
 });
