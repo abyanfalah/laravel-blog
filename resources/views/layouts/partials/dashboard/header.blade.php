@@ -20,7 +20,11 @@
     <link rel="stylesheet" href="/assets/bootstrap/sidebars.css">
     <script src="/assets/bootstrap/sidebars.js"></script>
 
-    {{-- Datatables  --}}
+    {{-- bootstrap4 for datatables --}}
+    <link rel="stylesheet" href="/assets/bootstrap4/bootstrap.min.css">
+    <script src="/assets/bootstrap4/bootstrap.min.js"></script>
+
+    {{-- Datatables bootstrap  --}}
     <link rel="stylesheet" href="/assets/datatables/dataTables.bootstrap4.min.css">
     <script src="/assets/datatables/dataTables.bootstrap4.min.js"></script>
 
