@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="col mx-auto">
-    <div class="card">
+    <div class="card mb-5">
         <div class="card-header  py-3">
             <div class="row">
                 <div class="col">
