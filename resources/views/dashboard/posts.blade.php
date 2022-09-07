@@ -61,16 +61,34 @@
 
 <script>
     $(document).ready(function(){
-            @if (session('dashboard_message'))
-                let modalCreated = $("#postCreatedModal")
-                modalCreated.modal('show')
-                setTimeout(() => {
-                    modalCreated.modal('hide')
-                }, 1500);
-            @endif
+        // show modal when created new post
+        @if (session('post'))
+            let modalCreated = $("#postCreatedModal")
+            modalCreated.modal('show')
+            setTimeout(() => {
+                modalCreated.modal('hide')
+            }, 1500);
 
-        })
-    </script>
+        @elseif (session('post_deleted_message'))
+            let modalDeleted = $("#postDeletedModal")
+            modalDeleted.modal('show')
+            setTimeout(() => {
+                modalDeleted.modal('hide')
+            }, 1500);
+
+        @endif
+
+        const deleteForm = $("#deletePostModal form")
+        let deleteUrl = $("#deletePostModal form").attr('action')
+
+        $(document).on("click", ".btnDeletePost", function(){
+            let slug = $(this).attr('data-post-slug')
+            deleteForm.attr('action', deleteUrl + slug)
+            $("#deletePostModal").modal('show')
+
+        });
+    })
+</script>
 
 
 @endsection
