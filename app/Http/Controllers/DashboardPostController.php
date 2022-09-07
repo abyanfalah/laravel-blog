@@ -9,103 +9,103 @@ use Illuminate\Http\Request;
 
 class DashboardPostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('dashboard.posts', [
-            "title" => "My posts",
-            "posts" => Post::where('user_id', auth()->user()->id)->get()
-        ]);
-    }
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function index()
+	{
+		return view('dashboard.posts', [
+			"title" => "My posts",
+			"posts" => Post::where('user_id', auth()->user()->id)->get()
+		]);
+	}
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        return view('dashboard.post-create', [
-            "title" => "New posts",
-            "categories" => Category::all()
-        ]);
-    }
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public function create()
+	{
+		return view('dashboard.post-create', [
+			"title" => "New posts",
+			"categories" => Category::all()
+		]);
+	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
 
-        $validated_data = $request->validate([
-            "title"       => "required|unique:posts|max:255",
-            "slug"        => "required|unique:posts",
-            "category_id" => "required",
-            "body"        => "required"
-        ]);
-        $validated_data['user_id'] = auth()->user()->id;
+		$validated_data = $request->validate([
+			"title"       => "required|unique:posts|max:255",
+			"slug"        => "required|unique:posts",
+			"category_id" => "required",
+			"body"        => "required"
+		]);
+		$validated_data['user_id'] = auth()->user()->id;
 
-        $excerpt = strip_tags($validated_data['body']);
-        $excerpt = Str::limit($excerpt, 200, '...');
-        $validated_data['excerpt'] = $excerpt;
+		$excerpt = strip_tags($validated_data['body']);
+		$excerpt = Str::limit($excerpt, 200, '...');
+		$validated_data['excerpt'] = $excerpt;
 
-        Post::create($validated_data);
+		Post::create($validated_data);
 
-        return redirect('/dashboard/posts')->with('dashboard_message', 'Post created successfully');
-    }
+		return redirect('/dashboard/posts')->with('dashboard_message', 'Post created successfully');
+	}
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Post $post)
-    {
-        return view('dashboard.post-view', [
-            "title" => "My post",
-            "post" => $post
-        ]);
-    }
+	/**
+	 * Display the specified resource.
+	 *
+	 * @param  \App\Models\Post  $post
+	 * @return \Illuminate\Http\Response
+	 */
+	public function show(Post $post)
+	{
+		return view('dashboard.post-view', [
+			"title" => "My post",
+			"post" => $post
+		]);
+	}
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Post $post)
-    {
-        //
-    }
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  \App\Models\Post  $post
+	 * @return \Illuminate\Http\Response
+	 */
+	public function edit(Post $post)
+	{
+		//
+	}
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Post $post)
-    {
-        //
-    }
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  \Illuminate\Http\Request  $request
+	 * @param  \App\Models\Post  $post
+	 * @return \Illuminate\Http\Response
+	 */
+	public function update(Request $request, Post $post)
+	{
+		//
+	}
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Post  $post
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Post $post)
-    {
-        //
-    }
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  \App\Models\Post  $post
+	 * @return \Illuminate\Http\Response
+	 */
+	public function destroy(Post $post)
+	{
+		//
+	}
 }
