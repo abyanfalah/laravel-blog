@@ -57,7 +57,20 @@
             </table>
         </div>
     </div>
-
-
 </div>
+
+<script>
+    $(document).ready(function(){
+            @if (session('dashboard_message'))
+                let modalCreated = $("#postCreatedModal")
+                modalCreated.modal('show')
+                setTimeout(() => {
+                    modalCreated.modal('hide')
+                }, 1500);
+            @endif
+
+        })
+    </script>
+
+
 @endsection
