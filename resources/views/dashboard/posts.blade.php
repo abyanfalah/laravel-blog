@@ -24,6 +24,7 @@
                         <th>#</th>
                         <th>Title</th>
                         <th>Category</th>
+                        <th>Created at</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -37,6 +38,11 @@
                             <span class="badge text-dark">
                                 {{ $post->category->name }}
                             </span>
+                        </td>
+                        <td>
+                            <small>
+                                {{ $post->created_at->diffForHumans() }}
+                            </small>
                         </td>
                         <td>
                             <div class="btn-group">
