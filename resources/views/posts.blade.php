@@ -81,7 +81,6 @@
         </div>
     </div>
     <div class="row mt-3">
-
         @foreach ($posts->skip(1) as $post)
         <div class="col-6">
             <div class="card mb-3">
