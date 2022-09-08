@@ -80,12 +80,36 @@
 
     </form>
 
-
     {{-- auto slug when typing title --}}
-    <script>
+    {{-- <script>
         $("input[name=title]").keyup(function(){
             let slug = slugify($(this).val())
             $("input[name=slug]").val(slug)
         })
+    </script> --}}
+
+    <script>
+        $(document).ready(function(){
+
+            // auto slug
+            const inputSlug = $("input[name=slug]")
+            $("input[name=title]").change(function(){
+               let title = $("input[name=title]").val()
+                fetch('/utility/slugify?title=' + title)
+                .then(response => response.json())
+                .then(data => inputSlug.val(data.slug))
+            })
+
+            // leving page confirmation
+            let change = false;
+            $("input").change(function(){
+                change = true
+            })
+            window.onbeforeunload = function(){
+                console.log('asdf')
+                $("#leavePageModal").modal('show')
+            }
+        })
+
     </script>
 @endsection
