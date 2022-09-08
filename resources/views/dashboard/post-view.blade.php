@@ -13,8 +13,8 @@
             <div class="col text-end">
                 <div class="btn-group">
                         <a href="/dashboard/posts" class="btn btn-primary"><i class="bi-arrow-left"></i> Back</a>
-                        <a href="#" class="btn btn-warning"><i class="bi-pencil"></i> Edit</a>
-                        <button class="btn btn-danger"><i class="bi-trash"></i> Delete</button>
+                        <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-warning"><i class="bi-pencil"></i> Edit</a>
+                        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePostModal"><i class="bi-trash"></i> Delete</button>
                     </div>
             </div>
         </div>
