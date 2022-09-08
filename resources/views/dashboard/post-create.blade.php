@@ -1,7 +1,17 @@
 @extends('layouts.dashboard')
 
 @section('content')
-    <h3 class="mt-3 py-3">New post</h3>
+    <div class="row mt-3 py-3 col-md-8 pe-0">
+        <div class="col">
+            <h3 class="">New post</h3>
+        </div>
+        <div class="col text-end pe-0">
+            <a class="btn btn-primary" href="/dashboard/posts">
+                <i class="bi-arrow-left"></i>
+                 Back
+            </a>
+        </div>
+    </div>
 
     <form action="/dashboard/posts" method="POST" class="col-md-8">
         @csrf
@@ -25,13 +35,13 @@
         {{-- slug --}}
         <div class="form-group mb-3">
             <label>Slug</label>
-            <small class="text-muted">(auto-generated)</small>
+            {{-- <small class="text-muted">(auto-generated)</small> --}}
             <input name="slug" type="text"
             class="form-control
             @error('slug')
                 is-invalid
             @enderror"
-            value="{{ old('slug') }}"readonly>
+            value="{{ old('slug') }}">
             <small class="text-danger">
                 @error('slug')
                     {{ $message }}
@@ -40,7 +50,7 @@
         </div>
 
         {{-- category --}}
-        <div class="form-group mb-3 col-5">
+        <div class="form-group mb-3 col-5 ps-0">
             <label>Category</label>
             <select name="category_id" class="form-select">
                 @foreach ($categories as $category)
@@ -55,8 +65,8 @@
         {{-- body --}}
         <div class="form-group mb-3">
             <label>Body</label>
-            <input type="hidden" id="inputBody" name="body">
-            <trix-editor input="inputBody"></trix-editor>
+            <input type="hidden" id="inputBody" name="body" value="{{ old('body') }}">
+            <trix-editor input="inputBody" aria-valuetext="{{ old('body') }}" class="bg-white"></trix-editor>
             <small class="text-danger">
                 @error('body')
                     {{ $message }}
