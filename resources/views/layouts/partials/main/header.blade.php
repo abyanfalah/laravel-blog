@@ -12,6 +12,9 @@
     {{-- Bootstrap icons --}}
     <link rel="stylesheet" href="/assets/bootstrap/icons/bootstrap-icons.css">
 
+    {{-- popper.js --}}
+    {{-- <script src="/assets/bootstrap/bootstrap.min.js"></script> --}}
+
     {{-- jQuery & Bootstrap JS --}}
     <script src="/assets/jquery/jquery.min.js"></script>
     <script src="/assets/bootstrap/bootstrap.min.js"></script>
