@@ -99,16 +99,6 @@
                 .then(response => response.json())
                 .then(data => inputSlug.val(data.slug))
             })
-
-            // leving page confirmation
-            let change = false;
-            $("input").change(function(){
-                change = true
-            })
-            window.onbeforeunload = function(){
-                console.log('asdf')
-                $("#leavePageModal").modal('show')
-            }
         })
 
     </script>
