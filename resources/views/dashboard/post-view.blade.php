@@ -35,8 +35,22 @@
                 </small>
             </p>
 
-            <a href="/posts" class="mt-3 btn btn-danger"><i class="bi-arrow-left"></i> Back to posts</a>
+            <a href="/dashboard/posts" class="mt-3 btn btn-danger"><i class="bi-arrow-left"></i> Back to posts</a>
         </div>
     </div>
+
+<script>
+    $(document).ready(function(){
+            const slug = "{{ $post->slug }}"
+            console.log(slug)
+
+            // set form action url
+            const form = $("#deletePostModal form")
+            const actionUrl = form.attr('action')
+            form.attr('action', actionUrl + slug)
+            console.log(form.attr('action'));
+        })
+
+    </script>
 @endsection
 
