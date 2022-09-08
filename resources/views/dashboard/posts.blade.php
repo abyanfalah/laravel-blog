@@ -2,6 +2,28 @@
 
 @section('content')
 
+{{-- modal alerts after create/update/delete post --}}
+{{-- <script>let modal = ''</script>
+@if ($operation = session('post'))
+   @switch($operation)
+       @case('create')
+            @include('modals.post-created')
+            <script>modal = $("#postCreatedModal")</script>
+           @break
+
+       @case('delete')
+            @include('modals.post-deleted')
+            <script>modal = $("#postDeletedModal")</script>
+           @break
+
+        @case('update')
+            @include('modals.post-updated')
+            <script>modal = $("#postUpdatedModal")</script>
+
+        @default
+   @endswitch
+@endif --}}
+
 <div class="col mx-auto">
     <div class="card mb-5">
         <div class="card-header  py-3">
@@ -59,25 +81,25 @@
     </div>
 </div>
 
+
+{{-- NOTIFICATION MODAL AFTER OPERATION SUCCESS --}}
+@if ($operation = session('post'))
+    <script>
+        $(document).ready(function(){
+            let operation = "{{ $operation }}"
+            $("#operationName").text(operation)
+            $("#successModal").modal('show')
+            setTimeout(() => {
+                $("#successModal").modal('hide')
+            }, 1500);
+        })
+    </script>
+@endif
+
+
 <script>
     $(document).ready(function(){
-        // show modal when created new post
-        @if (session('post'))
-            let modalCreated = $("#postCreatedModal")
-            modalCreated.modal('show')
-            setTimeout(() => {
-                modalCreated.modal('hide')
-            }, 1500);
-
-        @elseif (session('post_deleted_message'))
-            let modalDeleted = $("#postDeletedModal")
-            modalDeleted.modal('show')
-            setTimeout(() => {
-                modalDeleted.modal('hide')
-            }, 1500);
-
-        @endif
-
+        // DELETION ============================================
         const deleteForm = $("#deletePostModal form")
         let deleteUrl = $("#deletePostModal form").attr('action')
 
