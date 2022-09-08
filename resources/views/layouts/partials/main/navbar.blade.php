@@ -30,7 +30,7 @@
                             {{ auth()->user()->name }}
                         </a>
 
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <ul class="dropdown-menu">
                             {{-- dashboard --}}
                             <li>
                                 <a class="dropdown-item" href="/dashboard">
