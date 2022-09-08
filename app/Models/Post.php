@@ -10,7 +10,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 class Post extends Model
 {
     use HasFactory;
-    // use Sluggable;
+    use Sluggable;
 
     protected $guarded = ['id'];
     protected $with = ['user', 'category'];
@@ -53,12 +53,12 @@ class Post extends Model
         return $this->belongsTo(User::class);
     }
 
-    // public function sluggable(): array
-    // {
-    //     return [
-    //         'slug' => [
-    //             'source' => 'title'
-    //         ]
-    //     ];
-    // }
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 }
