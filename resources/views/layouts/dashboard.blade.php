@@ -8,13 +8,18 @@
         <div class="col bg-light">
             {{-- @include('layouts.partials.dashboard.navbar') --}}
             {{-- content here --}}
-            <div class="px-3 mt-3">
+            <div class="px-3 pb-5 mt-3">
                 @yield('content')
             </div>
         </div>
     </div>
 </div>
 
-@include('modals.post-created')
-@include('modals.post-deleted')
+{{-- @include('modals.post-created')
+@include('modals.post-deleted') --}}
+{{-- @include('modals.post-updated') --}}
+
+@include('modals.leave-page')
+@include('modals.success-modal')
+@include('modals.post-delete')
 @include('layouts.partials.main.footer')
