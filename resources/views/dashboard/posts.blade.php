@@ -24,7 +24,7 @@
                         <th>#</th>
                         <th>Title</th>
                         <th>Category</th>
-                        <th>Created at</th>
+                        <th>Created</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -47,8 +47,8 @@
                         <td>
                             <div class="btn-group">
                                 <a href="/dashboard/posts/{{ $post->slug }}" class="btn btn-primary btn-sm"><i class="bi-eye"></i></a>
-                                <a href="#" class="btn btn-warning btn-sm"><i class="bi-pencil"></i></a>
-                                <button class="btn btn-danger btn-sm"><i class="bi-trash"></i></button>
+                                <a href="/dashboard/posts/{{ $post->slug }}/edit" class="btn btn-warning btn-sm"><i class="bi-pencil"></i></a>
+                                <button class="btn btn-danger btn-sm btnDeletePost" data-post-slug="{{ $post->slug }}"><i class="bi-trash"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -85,7 +85,6 @@
             let slug = $(this).attr('data-post-slug')
             deleteForm.attr('action', deleteUrl + slug)
             $("#deletePostModal").modal('show')
-
         });
     })
 </script>
