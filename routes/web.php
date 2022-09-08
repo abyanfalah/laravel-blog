@@ -52,6 +52,7 @@ Route::post('/registration', [UserController::class, 'registration'])->middlewar
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
+Route::get('/utility/slugify', [DashboardPostController::class, 'slugify'])->middleware('auth');
 // RESOURCE ===============================
 Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
 
