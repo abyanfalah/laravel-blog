@@ -121,6 +121,20 @@
                 .then(response => response.json())
                 .then(data => inputSlug.val(data.slug))
             })
+
+            // preview image after choosing
+            $("input[name=image]").change(function(){
+                const reader = new FileReader()
+                const file = this.files[0]
+                console.log("file: ", file)
+                // return
+                reader.readAsDataURL(file)
+                console.log("reader now: ", reader);
+                reader.onload = function(event){
+                    let result = event.target.result
+                    imagePreview.src = result
+                }
+            })
         })
 
     </script>
