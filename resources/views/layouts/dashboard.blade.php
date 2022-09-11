@@ -15,11 +15,6 @@
     </div>
 </div>
 
-{{-- @include('modals.post-created')
-@include('modals.post-deleted') --}}
-{{-- @include('modals.post-updated') --}}
-
-@include('modals.leave-page')
 @include('modals.success-modal')
 @include('modals.post-delete')
 @include('layouts.partials.main.footer')
