@@ -1,11 +1,10 @@
 @extends('layouts.main')
 
-{{-- @dd($dump) --}}
-
 @section('content')
 
 
 @if ($posts->count() > 0)
+
 	<div class="mb-3">
         <div class="row">
             <div class="col">
@@ -58,7 +57,17 @@
 
 
     <div class="card mb-3">
-        <img class="img-top rounded-top" height="350px" src="/assets/img/posts/{{ mt_rand(1,15) }}.jpg" alt="{{ $posts[0]->name }}">
+        @php
+            // if post has image
+            if($posts[0]->image){
+                $image_src = asset('storage/' . $posts[0]->image);
+            }
+            else{
+                $image_src = "/assets/img/posts/" . mt_rand(1, 15) . ".jpg";
+            }
+        @endphp
+
+        <img class="img-top rounded-top" height="350px" src="{{ $image_src }}" alt="{{ $posts[0]->title }}">
         <div class="card-body">
             <a href="/post/{{ $posts[0]->slug }}">
                 <h3 class="d-inline">
@@ -82,9 +91,20 @@
     </div>
     <div class="row mt-3">
         @foreach ($posts->skip(1) as $post)
+        @php
+            // if post has image
+            if($post->image){
+                $image_src = asset('storage/' . $post->image);
+            }
+            else{
+                $image_src = "/assets/img/posts/" . mt_rand(1, 15) . ".jpg";
+            }
+        @endphp
+
+
         <div class="col-6">
             <div class="card mb-3">
-                <img class="img-top rounded-top" height="200px" src="/assets/img/posts/{{ mt_rand(1,15) }}.jpg" alt="{{ $post->name }}">
+                <img class="img-top rounded-top" height="200px" src="{{ $image_src }}" alt="{{ $post->title }}">
                 <div class="card-body">
                     <a href="/post/{{ $post->slug }}">
                        <h3 class="d-inline">
