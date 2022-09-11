@@ -1,10 +1,19 @@
 @extends('layouts.main')
+@php
+    // if post has image
+    if($post->image){
+        $image_src = asset('storage/' . $post->image);
+    }
+    else{
+        $image_src = "/assets/img/posts/" . mt_rand(1, 15) . ".jpg";
+    }
+@endphp
 
 @section('content')
     <div class="card mb-5">
     <div class="div">
         <a href="/posts" class="btn btn-danger position-absolute"><i class="bi-arrow-left"></i> Back to posts</a>
-        <img src="/assets/img/posts/{{ mt_rand(1, 15) }}.jpg" height="300px" alt="{{ $post->title }}" class="card-img-top rounded-top">
+        <img src="{{ $image_src }}" height="300px" alt="{{ $post->title }}" class="card-img-top rounded-top">
     </div>
     <div class="card-body p-5">
         <h2>{{ $post->title }}</h2>
