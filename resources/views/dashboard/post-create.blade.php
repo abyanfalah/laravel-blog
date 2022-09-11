@@ -13,7 +13,7 @@
         </div>
     </div>
 
-    <form action="/dashboard/posts" method="POST" class="col-md-8">
+    <form action="/dashboard/posts" method="POST" enctype="multipart/form-data" class="col-md-8">
         @csrf
 
         {{-- title --}}
@@ -25,7 +25,7 @@
                 is-invalid
             @enderror"
             value="{{ old('title') }}" placeholder="">
-            <small class="text-danger">
+            <small class="text-danger invalid-feedback">
                 @error('title')
                     {{ $message }}
                 @enderror
@@ -35,14 +35,13 @@
         {{-- slug --}}
         <div class="form-group mb-3">
             <label>Slug</label>
-            {{-- <small class="text-muted">(auto-generated)</small> --}}
             <input name="slug" type="text"
             class="form-control
             @error('slug')
                 is-invalid
             @enderror"
             value="{{ old('slug') }}">
-            <small class="text-danger">
+            <small class="text-danger invalid-feedback">
                 @error('slug')
                     {{ $message }}
                 @enderror
