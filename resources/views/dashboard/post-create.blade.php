@@ -62,15 +62,38 @@
             </select>
         </div>
 
+        {{-- image --}}
+        <div class="form-group mb3">
+            <label>Image</label>
+            <input type="file" name="image" accept="image/jpeg, image/jpg, image/png"
+            class="form-control
+            @error('image')
+                is-invalid
+            @enderror
+            ">
+            {{-- image preview --}}
+            <img id="imagePreview" class="img-fluid mt-3" style="max-height: 650px">
+
+            <small class="text-danger invalid-feedback">
+                @error('image')
+                    {{ $message }}
+                @enderror
+            </small>
+        </div>
+
         {{-- body --}}
         <div class="form-group mb-3">
             <label>Body</label>
-            <input type="hidden" id="inputBody" name="body" value="{{ old('body') }}">
-            <trix-editor input="inputBody" aria-valuetext="{{ old('body') }}" class="bg-white"></trix-editor>
+            <input type="hidden" class="form-control" id="inputBody" name="body" value="{{ old('body') }}">
+            <trix-editor input="inputBody"
+            class="bg-white @error('body')
+                border-danger
+            @enderror">
+            </trix-editor>
             <small class="text-danger">
-                @error('body')
-                    {{ $message }}
-                @enderror
+            @error('body')
+                {{ $message }}
+            @enderror
             </small>
         </div>
 
