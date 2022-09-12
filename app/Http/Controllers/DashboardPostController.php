@@ -17,7 +17,7 @@ class DashboardPostController extends Controller
      */
     public function index()
     {
-        return view('dashboard.posts', [
+        return view('dashboard.post.index', [
             "title" => "My posts",
             "posts" => Post::where('user_id', auth()->user()->id)->get()
         ]);
@@ -30,7 +30,7 @@ class DashboardPostController extends Controller
      */
     public function create()
     {
-        return view('dashboard.post-create', [
+        return view('dashboard.post.create', [
             "title" => "New post",
             "categories" => Category::all()
         ]);
@@ -82,7 +82,7 @@ class DashboardPostController extends Controller
      */
     public function show(Post $post)
     {
-        return view('dashboard.post-view', [
+        return view('dashboard.post.show', [
             "title" => "My post",
             "post" => $post
         ]);
@@ -96,7 +96,7 @@ class DashboardPostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('dashboard.post-edit', [
+        return view('dashboard.post.edit', [
             "title" => "Edit post",
             "categories" => Category::all(),
             "post" => $post
@@ -115,7 +115,6 @@ class DashboardPostController extends Controller
         $rules = [
             "title"       => "required|max:255",
             "category_id" => "required",
-            "slug"        => "required",
             "body"        => "required"
         ];
 
@@ -123,7 +122,18 @@ class DashboardPostController extends Controller
             $rules['slug'] = "required|unique:posts";
         }
 
+        if ($request->file('image')) {
+            $rules['image'] = "image|max:2048";
+        }
+
+        // validate
         $validated_data = $request->validate($rules);
+
+
+        // store image, if any
+        if ($validated_data['image'] ?? false) {
+            $validated_data['image'] = $request->file('image')->store('post-images');
+        }
 
         $excerpt = strip_tags($validated_data['body']);
         $excerpt = Str::limit($excerpt, 200, '...');
