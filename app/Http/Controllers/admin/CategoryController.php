@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Post;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -15,7 +15,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return 'dis category index bruh';
+        return view('dashboard.category.index', [
+            "title" => "categories",
+            "categories" => Category::all()
+        ]);
     }
 
     /**
@@ -25,7 +28,9 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.category.create', [
+            "title" => "new category"
+        ]);
     }
 
     /**
@@ -36,51 +41,100 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            "name" => "required|max:64",
+            "slug" => "required|unique:categories"
+        ];
+
+        if ($request->file('image')) {
+            $rules['image'] = "image|max:2048";
+        }
+
+        $validated_data = $request->validate($rules);
+
+        // store image, if any
+        if ($validated_data['image'] ?? false) {
+            $validated_data['image'] = $request->file('image')->store('category-images');
+        }
+
+        Category::create($validated_data);
+
+        return redirect('/dashboard/categories')->with('category', 'created');
     }
 
-    /**
+    /**new
      * Display the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+    public function show(Category $category)
     {
-        //
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
+    public function edit(Category $category)
     {
-        //
+        return view('dashboard.category.edit', [
+            "title" => "edit category",
+            "category" => $category
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Category $category)
     {
-        //
+        $rules = [
+            "name" => "required|max:64",
+        ];
+
+        $stuff = [
+            "req" => $request->slug,
+            "own" => $category->slug
+        ];
+
+        // new slug should be unique
+        if ($request->slug != $category->slug) {
+            $rules['slug'] = "required|unique:categories";
+        }
+
+        if ($request->file('image')) {
+            $rules['image'] = "image|max:2048";
+        }
+
+        $validated_data = $request->validate($rules);
+
+        // store image, if any
+        if ($validated_data['image'] ?? false) {
+            $validated_data['image'] = $request->file('image')->store('category-images');
+        }
+
+        $category->update($validated_data);
+
+        return redirect('/dashboard/categories')->with('category', 'updated');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Post  $post
+     * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+
+        return redirect('/dashboard/categories')->with("category", "deleted");
     }
 }
