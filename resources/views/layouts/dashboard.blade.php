@@ -16,5 +16,5 @@
 </div>
 
 @include('modals.success-modal')
-@include('modals.post-delete')
+@include('modals.delete')
 @include('layouts.partials.main.footer')
