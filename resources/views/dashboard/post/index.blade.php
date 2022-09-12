@@ -84,7 +84,7 @@
         $(document).on("click", ".btnDeletePost", function(){
             let slug = $(this).attr('data-post-slug')
             deleteForm.attr('action', deleteUrl + slug)
-            $("#deletePostModal").modal('show')
+            $("#deleteItemModal").modal('show')
         });
     })
 </script>

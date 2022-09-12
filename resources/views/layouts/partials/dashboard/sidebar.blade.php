@@ -3,8 +3,12 @@
 		<img src="/assets/img/theblog_logo.svg" alt="">
     </a>
     <hr>
-	<ul class="nav nav-pills flex-column mb-auto">
 
+    {{-- menu --}}
+    <small class=" badge text-start">
+        Menu
+    </small>
+	<ul class="nav nav-pills flex-column">
 		<li class="nav-item ">
 			<a href="/dashboard" class="nav-link
             {{ request()->is('dashboard') ? 'text-danger bg-white shadow-sm' : 'text-white' }}">
@@ -20,13 +24,22 @@
                 My posts
             </a>
 		</li>
+	</ul>
+    <hr>
 
-
+    {{-- administration --}}
+    <small class="badge text-start">Administration</small>
+    <ul class="nav nav-pills flex-column">
+		<li class="nav-item ">
+			<a href="/dashboard/categories" class="nav-link
+            {{ request()->is('dashboard/categories*') ? 'text-danger bg-white shadow-sm' : 'text-white' }}">
+                <i class="bi-bookmarks"></i>
+                Categories
+            </a>
+		</li>
 	</ul>
 
-
-    <hr>
-    <div class="dropdown">
+    <div class="dropdown mt-auto">
       <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
         <img src="/assets/img/authors/{{ auth()->user()->id }}.jpg" alt="{{ auth()->user()->name }}" width="32" height="32" class="rounded-circle me-2">
         <strong class="text-white">{{ auth()->user()->name }}</strong>
