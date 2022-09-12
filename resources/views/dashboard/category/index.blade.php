@@ -23,7 +23,7 @@
                     <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Action</th>
+                        <th class="col-2">Action</th>
                     </tr>
                 </thead>
 
@@ -34,7 +34,6 @@
                         <td>{{ $category->name }}</td>
                         <td>
                             <div class="btn-group">
-                                <a href="/dashboard/categories/{{ $category->slug }}" class="btn btn-primary btn-sm"><i class="bi-eye"></i></a>
                                 <a href="/dashboard/categories/{{ $category->slug }}/edit" class="btn btn-warning btn-sm"><i class="bi-pencil"></i></a>
                                 <button class="btn btn-danger btn-sm btnDeleteCategory" data-post-slug="{{ $category->slug }}"><i class="bi-trash"></i></button>
                             </div>
@@ -49,7 +48,7 @@
 
 
 {{-- NOTIFICATION MODAL AFTER SUCCESS OPERATION --}}
-@if ($operation = session('post'))
+@if ($operation = session('category'))
     <script>
         $(document).ready(function(){
             let operation = "{{ $operation }}"

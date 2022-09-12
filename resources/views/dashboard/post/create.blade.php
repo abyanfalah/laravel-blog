@@ -117,7 +117,7 @@
             const inputSlug = $("input[name=slug]")
             $("input[name=title]").change(function(){
                let title = $("input[name=title]").val()
-                fetch('/utility/slugify?title=' + title)
+                fetch('/utility/slugify?source=' + title)
                 .then(response => response.json())
                 .then(data => inputSlug.val(data.slug))
             })

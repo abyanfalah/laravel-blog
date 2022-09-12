@@ -1,39 +1,43 @@
 @extends('layouts.dashboard')
+
 @php
-    if($post->image){
-        $img_src = asset('storage/' . $post->image);
+    // if post has image
+    if($category->image){
+        $image_src = asset('storage/' . $category->image);
     }else{
-        $img_src = '/assets/img/posts/' . mt_rand(1, 15) . '.jpg';
+        $image_src = '/assets/img/theblog_logo_red.png';
     }
 @endphp
+
 
 @section('content')
     <div class="row mt-3 py-3 col-md-8 pe-0">
         <div class="col">
-            <h3 class="">Edit post</h3>
+            <h3 class="">New Category</h3>
         </div>
-        <div class="col text-end">
-            <a class="btn btn-primary" href="/dashboard/posts">
+        <div class="col text-end pe-0">
+            <a class="btn btn-primary" href="/dashboard/categories">
                 <i class="bi-arrow-left"></i>
                  Back
             </a>
         </div>
     </div>
 
-    <form action="/dashboard/posts/{{ $post->slug }}" method="POST" class="col-md-8" enctype="multipart/form-data">
+    <form action="/dashboard/categories/{{ $category->slug }}" method="POST" enctype="multipart/form-data" class="col-md-8">
         @csrf
-        @method('patch')
+        @method('PUT')
 
-        {{-- title --}}
+        {{-- name --}}
         <div class="form-group mb-3">
-            <label>Title</label>
-            <input autofocus name="title" type="text" class="form-control
-                @error('title')
-                    is-invalid
-                @enderror"
-            value="{{ $post->title }}" placeholder="">
-            <small class="text-danger">
-                @error('title')
+            <label>Name</label>
+            <input autofocus name="name" type="text"
+            class="form-control
+            @error('name')
+                is-invalid
+            @enderror"
+            value="{{ $category->name }}" placeholder="">
+            <small class="text-danger invalid-feedback">
+                @error('name')
                     {{ $message }}
                 @enderror
             </small>
@@ -42,43 +46,30 @@
         {{-- slug --}}
         <div class="form-group mb-3">
             <label>Slug</label>
-            {{-- <small class="text-muted">(auto-generated)</small> --}}
-            <input name="slug" type="text" class="form-control
-                @error('slug')
-                    is-invalid
-                @enderror"
-            value="{{ $post->slug }}">
-            <small class="text-danger">
+            <input name="slug" type="text"
+            class="form-control
+            @error('slug')
+                is-invalid
+            @enderror"
+            value="{{ $category->slug }}">
+            <small class="text-danger invalid-feedback">
                 @error('slug')
                     {{ $message }}
                 @enderror
             </small>
         </div>
 
-        {{-- category --}}
-        <div class="form-group mb-3 col-5 ps-0">
-            <label>Category</label>
-            <select name="category_id" class="form-select">
-                @foreach ($categories as $category)
-                    <option
-                    value="{{ $category->id }}"
-                    {{ $category->slug == $post->category->slug ? "selected" : '' }}
-                        >{{ Str::ucfirst($category->name )}}</option>
-                @endforeach
-            </select>
-        </div>
-
         {{-- image --}}
         <div class="form-group mb3">
             <label>Image</label>
-            <input type="file" name="image" accept="image/jpeg, image/jpg, image/png" value="{{ $post->image }}"
+            <input type="file" name="image" accept="image/jpeg, image/jpg, image/png"
             class="form-control
             @error('image')
                 is-invalid
             @enderror
             ">
             {{-- image preview --}}
-            <img id="imagePreview" src="{{ $img_src }}" class="img-fluid mt-3" style="max-height: 650px">
+            <img id="imagePreview" src="{{ $image_src }}" class="img-fluid mt-3" style="max-height: 650px">
 
             <small class="text-danger invalid-feedback">
                 @error('image')
@@ -87,39 +78,27 @@
             </small>
         </div>
 
-        {{-- body --}}
-        <div class="form-group mb-3">
-            <label>Body</label>
-            <input type="hidden" id="inputBody" name="body" value="{{ $post->body }}">
-            <trix-editor input="inputBody" class="bg-white @error('body')
-                border-danger
-            @enderror"></trix-editor>
-            <small class="text-danger">
-                @error('body')
-                    {{ $message }}
-                @enderror
-            </small>
-        </div>
-
         <button class="btn btn-primary">
-           <i class="bi-save2"></i> Save changes
+            <i class="bi-save2"></i>
+           Save changes
         </button>
 
     </form>
 
-
     <script>
-        // auto slug when typing title
-        $("input[name=title]").change(function(){
-            let title = $(this).val()
-            let inputSlug = $("input[name=slug]")
-            fetch('/utility/slugify?title=' + title )
-            .then(response => response.json())
-            .then(data => inputSlug.val(data.slug))
-        })
+        $(document).ready(function(){
 
-        // preview image after choosing
-        $("input[name=image]").change(function(){
+            // auto slug
+            const inputSlug = $("input[name=slug]")
+            $("input[name=name]").change(function(){
+               let name = $("input[name=name]").val()
+                fetch('/utility/slugify?source=' + name)
+                .then(response => response.json())
+                .then(data => inputSlug.val(data.slug))
+            })
+
+            // preview image after choosing
+            $("input[name=image]").change(function(){
                 const reader = new FileReader()
                 const file = this.files[0]
                 console.log("file: ", file)
@@ -131,5 +110,7 @@
                     imagePreview.src = result
                 }
             })
+        })
+
     </script>
 @endsection

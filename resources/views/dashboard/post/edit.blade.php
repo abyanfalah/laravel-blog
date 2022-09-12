@@ -113,7 +113,7 @@
         $("input[name=title]").change(function(){
             let title = $(this).val()
             let inputSlug = $("input[name=slug]")
-            fetch('/utility/slugify?title=' + title )
+            fetch('/utility/slugify?source=' + title )
             .then(response => response.json())
             .then(data => inputSlug.val(data.slug))
         })

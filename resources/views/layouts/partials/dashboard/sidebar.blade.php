@@ -25,19 +25,22 @@
             </a>
 		</li>
 	</ul>
-    <hr>
 
-    {{-- administration --}}
-    <small class="badge text-start">Administration</small>
-    <ul class="nav nav-pills flex-column">
-		<li class="nav-item ">
-			<a href="/dashboard/categories" class="nav-link
-            {{ request()->is('dashboard/categories*') ? 'text-danger bg-white shadow-sm' : 'text-white' }}">
-                <i class="bi-bookmarks"></i>
-                Categories
-            </a>
-		</li>
-	</ul>
+    @if (auth()->user()->is_admin)
+    <hr>
+        {{-- administration --}}
+        <small class="badge text-start">Administration</small>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item ">
+                <a href="/dashboard/categories" class="nav-link
+                {{ request()->is('dashboard/categories*') ? 'text-danger bg-white shadow-sm' : 'text-white' }}">
+                    <i class="bi-bookmarks"></i>
+                    Categories
+                </a>
+            </li>
+        </ul>
+    @endif
+
 
     <div class="dropdown mt-auto">
       <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
