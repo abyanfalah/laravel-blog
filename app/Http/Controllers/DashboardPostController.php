@@ -113,7 +113,8 @@ class DashboardPostController extends Controller
     public function update(Request $request, Post $post)
     {
         $rules = [
-            "title"       => "required|max:255",
+            "title"       => "required|ma
+            x:255",
             "category_id" => "required",
             "body"        => "required"
         ];
@@ -159,7 +160,5 @@ class DashboardPostController extends Controller
 
     public function slugify(Request $request)
     {
-        $slug = SlugService::createSlug(Post::class, 'slug', $request->title);
-        return response()->json(['slug' => $slug]);
     }
 }
