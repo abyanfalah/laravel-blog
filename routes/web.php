@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\admin\CategoryController;
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -22,7 +24,10 @@ use App\Http\Controllers\DashboardPostController;
 
 
 Route::get('/', function () {
-    return view('home');
+    return view('home', [
+        "title" => "Home",
+        "posts" => Post::limit(9)->latest()->get()
+    ]);
 });
 
 Route::get('/posts', [PostController::class, 'index']);
@@ -54,7 +59,12 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('aut
 
 Route::get('/utility/slugify', [DashboardPostController::class, 'slugify'])->middleware('auth');
 // RESOURCE ===============================
-Route::resource('/dashboard/posts', DashboardPostController::class)->middleware('auth');
+Route::resource('/dashboard/posts', DashboardPostController::class)
+    ->middleware('auth');
+
+Route::resource('/dashboard/categories', CategoryController::class)
+    ->except('show')
+    ->middleware('auth');
 
 
 // ========================================
