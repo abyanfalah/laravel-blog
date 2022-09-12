@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\admin\CategoryController;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Category;
@@ -10,6 +9,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DashboardPostController;
+use App\Http\Controllers\admin\CategoryController;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,18 +58,23 @@ Route::post('/registration', [UserController::class, 'registration'])->middlewar
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
-Route::get('/utility/slugify', [DashboardPostController::class, 'slugify'])->middleware('auth');
+
 // RESOURCE ===============================
 Route::resource('/dashboard/posts', DashboardPostController::class)
     ->middleware('auth');
 
 Route::resource('/dashboard/categories', CategoryController::class)
     ->except('show')
-    ->middleware('auth');
+    ->middleware('admin');
 
 
 // ========================================
 
+// UTILITIES ===================================
+Route::get('/utility/slugify', function () {
+    $slug = SlugService::createSlug(Post::class, 'slug', request()->source);
+    return response()->json(['slug' => $slug]);
+});
 
 Route::get('/testpage', function () {
     return view('modals.logout');
