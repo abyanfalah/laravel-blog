@@ -23,7 +23,18 @@ class DatabaseSeeder extends Seeder
             'username'          => 'abyan',
             'email'             => 'abyan@gmail.com',
             'email_verified_at' => now(),
+            // 'is_admin'          => true,
             'password'          => bcrypt('scootermania'),
+            'remember_token'    => Str::random(10),
+        ]);
+
+        User::create([
+            'name'              => 'The Great Admin',
+            'username'          => 'admin',
+            'email'             => 'admin@gmail.com',
+            'email_verified_at' => now(),
+            'is_admin'          => true,
+            'password'          => bcrypt('admin'),
             'remember_token'    => Str::random(10),
         ]);
 
