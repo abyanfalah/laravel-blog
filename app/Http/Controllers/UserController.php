@@ -59,7 +59,6 @@ class UserController extends Controller
 
     public function registration(Request $request)
     {
-
         $validated_data = $request->validate([
             "name" => "required|max:255",
             "username" => "required|unique:users|min:4|max:128",
@@ -67,8 +66,10 @@ class UserController extends Controller
             "password" => "required|min:8|max:64"
         ]);
 
+        $validated_data['password'] = bcrypt($validated_data['password']);
+
         User::create($validated_data);
 
-        return redirect('/login')->with('login_message', "You've been registered, now try login :)");
+        return redirect('/login')->with('just_registered', "You've been registered, now try login :)");
     }
 }
