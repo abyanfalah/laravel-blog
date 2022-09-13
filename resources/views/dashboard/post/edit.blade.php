@@ -87,6 +87,12 @@
             </small>
         </div>
 
+        {{-- old image --}}
+        @if ($post->image)
+         <input type="hidden" value="{{ $post->image }}" name="old_image">
+        @endif
+
+
         {{-- body --}}
         <div class="form-group mb-3">
             <label>Body</label>
