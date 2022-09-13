@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="col mx-auto">
+<div class="col-lg-8">
     <div class="card mb-5">
         <div class="card-header  py-3">
             <div class="row">
@@ -18,7 +18,7 @@
 
         </div>
         <div class="card-body">
-            <table class="table table-borderless table-striped mx-auto">
+            <table class="table table-borderless table-striped mx-auto table-sm">
                 <thead>
                     <tr>
                         <th>#</th>
