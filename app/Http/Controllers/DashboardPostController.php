@@ -113,8 +113,7 @@ class DashboardPostController extends Controller
     public function update(Request $request, Post $post)
     {
         $rules = [
-            "title"       => "required|ma
-            x:255",
+            "title"       => "required|max:255",
             "category_id" => "required",
             "body"        => "required"
         ];
