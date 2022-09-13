@@ -65,7 +65,7 @@
                 <span class="text-muted">
                     Or maybe you
                 </span>
-                <a href="#">forgot your password</a>
+                <a href="#" class="">forgot your password</a>
             </small>
             </div>
 
@@ -74,6 +74,7 @@
     </div>
 </div>
 
+{{-- when failed login --}}
 @if(session('login_message'))
 <script>
     $("input").change(function(){
@@ -82,5 +83,14 @@
 </script>
 @endif
 
-{{-- @include('modals.registration') --}}
+{{-- when just registered --}}
+@if (session('just_registered'))
+<script>
+    let message = "You've been registered.<br> Now try login :)"
+    loginTitle.innerHTML = message
+</script>
+
+@endif
+
+
 @endsection
