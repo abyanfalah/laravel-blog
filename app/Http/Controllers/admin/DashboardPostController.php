@@ -60,7 +60,7 @@ class DashboardPostController extends Controller
         $validated_data = $request->validate($rules);
 
         // store the image, if any
-        if ($validated_data['image']) {
+        if ($validated_data['image'] ?? false) {
             $validated_data['image'] = $request->file('image')->store('post-images');
         }
 
