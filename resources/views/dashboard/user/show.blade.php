@@ -6,7 +6,12 @@
         $image_src = asset('storage/' . $user->image);
     }
     else{
-        $image_src = "/assets/img/authors/default.png";
+        $image_src = "assets/img/authors/" . $user->id . ".jpg";
+        if(File::exists($image_src)){
+            $image_src = asset($image_src);
+        }else{
+            $image_src = asset("/assets/img/authors/default.svg");
+        }
     }
 @endphp
 
@@ -19,7 +24,7 @@
     <div class="card-body bg-white">
         <div class="row">
             <div class="col-md-4">
-                <img src="{{ $image_src }}" alt="{{ $user->username }}">
+                <img src="{{ $image_src }}" alt="{{ $user->username }}" style="width: 300px" class="rounded-circle">
             </div>
             <div class="col d-flex justify-content-center align-items-center">
                 <table class="table">
@@ -63,13 +68,13 @@
 
 <script>
     $(document).ready(function(){
-            const slug = "{{ $user->username }}"
-            console.log(slug)
+            const username = "{{ $user->username }}"
+            console.log(username)
 
             // set form action url
             const form = $("#deleteItemModal form")
             const actionUrl = form.attr('action')
-            form.attr('action', actionUrl + slug)
+            form.attr('action', actionUrl + username)
             console.log(form.attr('action'));
         })
 

@@ -12,7 +12,9 @@
                 $image_src = asset('storage/' . $path);
             }else{
                 $image_src = "assets/img/categories/". $category->slug . ".jpg";
-                if(! File::exists($image_src)){
+                if(File::exists($image_src)){
+                    $image_src = asset($image_src);
+                }else{
                     $image_src = asset('/assets/img/categories/default.svg');
                 }
             }
