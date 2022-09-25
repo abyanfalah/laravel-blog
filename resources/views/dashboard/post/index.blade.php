@@ -78,8 +78,8 @@
 <script>
     $(document).ready(function(){
         // DELETION ============================================
-        const deleteForm = $("#deletePostModal form")
-        let deleteUrl = $("#deletePostModal form").attr('action')
+        const deleteForm = $("#deleteItemModal form")
+        let deleteUrl = $("#deleteItemModal form").attr('action')
 
         $(document).on("click", ".btnDeletePost", function(){
             let slug = $(this).attr('data-post-slug')
