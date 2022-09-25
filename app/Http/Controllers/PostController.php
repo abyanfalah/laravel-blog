@@ -26,7 +26,7 @@ class PostController extends Controller
 
         return view('posts', [
             "title" => "Blog posts",
-            "posts" => $posts->latest()->get(),
+            "posts" => $posts->latest()->paginate(9)->withQueryString(),
             "filtered" => $filtered
         ]);
     }
