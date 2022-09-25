@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\admin;
 
-use App\Http\Controllers\Controller;
 use App\Models\Post;
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class DashboardUserController extends Controller
 {
@@ -18,8 +19,8 @@ class DashboardUserController extends Controller
     {
         return view('dashboard.user.index', [
             "title" => "users",
-            // "users" => User::where('is_admin', false)
-            "users" => User::all(),
+            "users" => User::where('is_admin', false)->get(),
+            // "users" => User::all(),
             "post"  => Post::all()
         ]);
     }
@@ -92,6 +93,12 @@ class DashboardUserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        $user->delete();
+
+        if ($user->image) {
+            Storage::delete($user->image);
+        }
+
+        return redirect('/dashboard/users')->with('user', 'deleted');
     }
 }
