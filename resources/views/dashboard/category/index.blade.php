@@ -66,7 +66,7 @@
     $(document).ready(function(){
         // DELETION ============================================
         const deleteForm = $("#deleteItemModal form")
-        let deleteUrl = $("#deleteItemModal form").attr('action')
+        let deleteUrl = "/dashboard/categories/"
 
         $(document).on("click", ".btnDeleteCategory", function(){
             let slug = $(this).attr('data-post-slug')
