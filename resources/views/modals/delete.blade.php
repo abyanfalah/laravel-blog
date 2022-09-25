@@ -9,7 +9,7 @@
             </div>
             <div class="modal-footer">
                 <button class="btn btn-primary" data-bs-dismiss="modal">No</button>
-                <form action="/dashboard/posts/" method="post">
+                <form action="" method="post">
                     @method("delete")
                     @csrf
                     <button class="btn btn-outline-danger">Yes</button>
