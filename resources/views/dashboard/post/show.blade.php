@@ -29,12 +29,6 @@
                     </div>
             </div>
         </div>
-        {{-- <small class="text-muted mb-3">
-            By: <a href="/posts?author={{ $post->user->username }}">{{ $post->user->name }}</a>
-            In: <a href="/posts?category={{ $post->category->slug }}">{{ $post->category->name }}</a>
-            <br>
-            {{ $post->created_at->diffForHumans() }}
-        </small> --}}
 
             <p>
                 {!! $post->body !!}
@@ -56,7 +50,7 @@
             console.log(slug)
 
             // set form action url
-            const form = $("#deletePostModal form")
+            const form = $("#deleteItemModal form")
             const actionUrl = form.attr('action')
             form.attr('action', actionUrl + slug)
             console.log(form.attr('action'));

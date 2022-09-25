@@ -12,34 +12,52 @@
 
 
 @section('content')
-<div class="card mb-5">
-    <div class="div">
-        <img src="{{ $image_src }}" height="300px" alt="{{ $user->name }}" class="card-img-top rounded-top">
+<div class="card-mb-5">
+    <div class="card-header">
+        <h3>User information</h3>
     </div>
-    <div class="card-body p-5">
-    <div class="row">
-        <div class="col">
-            <h2>{{ $user->name }}</h2>
-        </div>
-        <div class="col text-end">
-            <div class="btn-group">
-                    <a href="/dashboard/users" class="btn btn-primary"><i class="bi-arrow-left"></i> Back</a>
-                    <a href="/dashboard/users/{{ $user->username }}/edit" class="btn btn-warning"><i class="bi-pencil"></i> Edit</a>
-                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteItemModal"><i class="bi-trash"></i> Delete</button>
-                </div>
-        </div>
-    </div>
-        <p>
-            {!! $user->body !!}
-        </p>
+    <div class="card-body bg-white">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="{{ $image_src }}" alt="{{ $user->username }}">
+            </div>
+            <div class="col d-flex justify-content-center align-items-center">
+                <table class="table">
+                    <tr>
+                        <td class="fw-bold col-3">Username</td>
+                        <td class="">{{ $user->username }}</td>
+                    </tr>
 
-        <p class="text-muted">
-            <small>
-                created at: {{ $user->created_at }}
-            </small>
-        </p>
+                    <tr>
+                        <td class="fw-bold col-3">Name</td>
+                        <td class="">{{ $user->name }}</td>
+                    </tr>
 
-        <a href="/dashboard/users" class="mt-3 btn btn-danger"><i class="bi-arrow-left"></i> Back to users</a>
+                    <tr>
+                        <td class="fw-bold col-3">Email</td>
+                        <td class="">{{ $user->email }}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="fw-bold col-3">Registered</td>
+                        <td class="">{{ $user->created_at }}</td>
+                    </tr>
+
+                    <tr>
+                        <td class="fw-bold col-3">Posts count</td>
+                        <td class="">
+                            {{ $post_count }}
+                            <a href="/dashboard/users/{{ $user->username }}/posts" class="btn btn-primary ms-5">See posts</a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="fw-bold col-3">User type</td>
+                        <td class="">{{ $user_type }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
 

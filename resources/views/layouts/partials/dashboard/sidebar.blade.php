@@ -31,6 +31,8 @@
         {{-- administration --}}
         <small class="badge text-start">Administration</small>
         <ul class="nav nav-pills flex-column">
+
+            {{-- categories --}}
             <li class="nav-item ">
                 <a href="/dashboard/categories" class="nav-link
                 {{ request()->is('dashboard/categories*') ? 'text-danger bg-white shadow-sm' : 'text-white' }}">
@@ -38,13 +40,37 @@
                     Categories
                 </a>
             </li>
+
+            {{-- users --}}
+            <li class="nav-item ">
+                <a href="/dashboard/users" class="nav-link
+                {{ request()->is('dashboard/users*') ? 'text-danger bg-white shadow-sm' : 'text-white' }}">
+                    <i class="bi-person"></i>
+                    Users
+                </a>
+            </li>
+
+            {{-- posts --}}
+            <li class="nav-item ">
+                <a href="/dashboard/posts" class="nav-link
+                {{ request()->is('dashboard/posts*') ? 'text-danger bg-white shadow-sm' : 'text-white' }}">
+                    <i class="bi-person"></i>
+                    Users
+                </a>
+            </li>
         </ul>
     @endif
 
-
+    {{-- user button --}}
     <div class="dropdown mt-auto">
       <a href="#" class="d-flex align-items-center link-light text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="/assets/img/authors/{{ auth()->user()->id }}.jpg" alt="{{ auth()->user()->name }}" width="32" height="32" class="rounded-circle me-2">
+
+        {{-- check user image --}}
+        @if(auth()->user()->image)
+            <img src="{{ asset('storage/' . auth()->user()->image) }}" alt="{{ auth()->user()->name }}" width="32" height="32" class="rounded-circle me-2">
+        @else
+            <span class="bi-person-circle"></span>
+        @endif
         <strong class="text-white">{{ auth()->user()->name }}</strong>
       </a>
       <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2">

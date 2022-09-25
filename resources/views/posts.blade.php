@@ -53,9 +53,6 @@
         <h3 class="fs-6 badge bg-primary">In: {{ $filtered['category'] }}</h3>
     @endif
 
-
-
-
     <div class="card mb-3">
         @php
             // if post has image
@@ -89,7 +86,7 @@
             Read more</a>
         </div>
     </div>
-    <div class="row mt-3">
+    <div class="row mt-3 mb-5">
         @foreach ($posts->skip(1) as $post)
         @php
             // if post has image
@@ -128,6 +125,10 @@
             </div>
         </div>
         @endforeach
+
+        <div class="text-danger">
+            {{ $posts->links() }}
+        </div>
     </div>
 
 @else
