@@ -5,12 +5,15 @@ use App\Models\User;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DashboardPostController;
 use App\Http\Controllers\admin\CategoryController;
 use Cviebrock\EloquentSluggable\Services\SlugService;
+use App\Http\Controllers\admin\DashboardPostController;
+use App\Http\Controllers\admin\DashboardUserController;
+use Illuminate\Support\Facades\File;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +61,8 @@ Route::post('/registration', [UserController::class, 'registration'])->middlewar
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth');
 
+Route::get('/dashboard/users/{user:username}/posts', [DashboardUserController::class, 'user_posts']);
+
 
 // RESOURCE ===============================
 Route::resource('/dashboard/posts', DashboardPostController::class)
@@ -66,6 +71,9 @@ Route::resource('/dashboard/posts', DashboardPostController::class)
 Route::resource('/dashboard/categories', CategoryController::class)
     ->except('show')
     ->middleware('admin');
+
+Route::resource('/dashboard/users', DashboardUserController::class)->middleware('admin')
+    ->except(['edit', 'update', 'store']);
 
 
 // ========================================
