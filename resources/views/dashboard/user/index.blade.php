@@ -35,8 +35,8 @@
                         <td>
                             <div class="btn-group">
                                 <a href="/dashboard/users/{{ $user->username }}" class="btn btn-primary btn-sm"><i class="bi-eye"></i></a>
-                                <a href="/dashboard/users/{{ $user->username }}/edit" class="btn btn-warning btn-sm"><i class="bi-pencil"></i></a>
-                                <button class="btn btn-danger btn-sm btnDeleteUser" data-post-slug="{{ $user->username }}"><i class="bi-trash"></i></button>
+                                {{-- <a href="/dashboard/users/{{ $user->username }}/edit" class="btn btn-warning btn-sm"><i class="bi-pencil"></i></a> --}}
+                                <button class="btn btn-danger btn-sm btnDeleteUser" data-post-username="{{ $user->username }}"><i class="bi-trash"></i></button>
                             </div>
                         </td>
                     </tr>
@@ -67,11 +67,11 @@
     $(document).ready(function(){
         // DELETION ============================================
         const deleteForm = $("#deleteItemModal form")
-        let deleteUrl = $("#deleteItemModal form").attr('action')
+        let deleteUrl = "/dashboard/users/"
 
         $(document).on("click", ".btnDeleteUser", function(){
-            let slug = $(this).attr('data-post-slug')
-            deleteForm.attr('action', deleteUrl + slug)
+            let username = $(this).attr('data-post-username')
+            deleteForm.attr('action', deleteUrl + username)
             $("#deleteItemModal").modal('show')
         });
     })
